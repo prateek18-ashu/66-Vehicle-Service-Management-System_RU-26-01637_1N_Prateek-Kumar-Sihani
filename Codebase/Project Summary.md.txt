@@ -1,0 +1,34 @@
+# Project Summary: Vehicle Service Management System
+
+**Institution:** Rungta International Skills University – School of Computer Science and Engineering  
+**Program:** Bachelor of Technology in Computer Science and Engineering (First Semester)  
+**Problem Statement No.:** 66  
+**Language:** Python 3  
+
+---
+
+## 1. Overview & Objective
+The **Vehicle Service Management System** is a console-based software solution designed to streamline daily operations at an automobile service centre. Its primary objective is to replace manual record-keeping with an automated system capable of registering vehicle service requests, computing accurate service bills inclusive of taxes, tracking service progress, and maintaining persistent records across sessions.
+
+---
+
+## 2. Core Architecture & Concepts Implemented
+To ensure clean, modular, and maintainable code, the application leverages foundational Python programming paradigms:
+
+* **Object-Oriented Programming (OOP):** 
+  The system defines a dedicated `ServiceRecord` class that encapsulates all attributes of a service ticket (registration number, owner name, vehicle type, service type, cost, and status) along with methods for dynamic cost calculation and formatted display.
+* **Data Structures (Dictionaries):** 
+  Active service records are stored in an in-memory Python dictionary keyed by the unique vehicle registration number. This enables $O(1)$ average time complexity for searching, updating, and deleting specific vehicle records.
+* **Persistent File Handling:** 
+  All changes made during runtime (additions, status updates, and deletions) are synchronized with a local text file (`services.txt`), ensuring zero data loss when the console application exits.
+* **Automated Tax & Billing Logic:** 
+  Service charges are retrieved from a predefined rate card and automatically adjusted to include an 18% Goods and Services Tax (GST) using the formula:
+  $$\text{Final Cost} = \text{Base Price} \times 1.18$$
+
+---
+
+## 3. Functional Scope (CRUD Operations)
+1. **Create (Add Record):** Accepts vehicle and customer details, validates the requested service against allowed options (`Oil Change`, `Wheel Alignment`, `Full Service`, `Brake Repair`), sets the default status to `Pending`, calculates total cost, and saves the entry.
+2. **Read (View Records):** Retrieves and displays all active service records stored in the system.
+3. **Update (Update Status):** Modifies the workflow state of an existing vehicle record (`Pending` $\rightarrow$ `In Progress` $\rightarrow$ `Completed`) via its registration number.
+4. **Delete (Delete Record):** Removes a record from both memory and `services.txt` once it is no longer needed, while gracefully handling non-existent registration numbers.
